@@ -9,17 +9,11 @@ import { getUserId } from '@/lib/session';
 import { AREAS } from '@/lib/constants';
 
 export default function HomePage() {
-  const [seeded, setSeeded] = useState(false);
   const [userId, setUserId] = useState<number | null>(null);
 
   useEffect(() => {
     setUserId(getUserId());
   }, []);
-
-  const handleSeed = async () => {
-    await fetch('/api/seed', { method: 'POST' });
-    setSeeded(true);
-  };
 
   return (
     <Shell>
@@ -84,12 +78,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Seed button */}
+        {/* Info */}
         <section className="py-8 text-center">
-          <p className="text-sm text-muted mb-3">Demo verisi yuklemek icin:</p>
-          <Button variant="secondary" size="sm" onClick={handleSeed} disabled={seeded}>
-            {seeded ? 'Yuklendi!' : 'Seed Verisini Yukle'}
-          </Button>
+          <p className="text-xs text-muted/50">100 demo profil otomatik yuklenir</p>
         </section>
       </div>
     </Shell>
